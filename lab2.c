@@ -13,10 +13,12 @@ int main()
 	//be careful of input variable causing errors	
 	int input;
 	int input2;
-	int i;
+	int i=0;
+	int i2;
+	
 	while(1)
 	{
-	printf("Which program would you like to run?: 1.Factorial 2.Fibonacci 3.Hanoi Towers");
+	printf("\n Which program would you like to run?: 1.Factorial 2.Fibonacci 3.Hanoi Towers");
 	scanf("%c", &selection);
 	
 	switch(selection)
@@ -32,11 +34,21 @@ int main()
 			printf("Please enter a whole number for Fibonacci:");		
 			scanf("%d", &input2);
 			printf("\n");
-			for(i = 0; i <= input2; i++ )
+			while(1)
 			{
-				printf("%d ", fibonacci(i));
+				if(fibonacci(i) > input2 && fibonacci(i-1) < input2)
+				{
+					for(i2=0; i2 < i; i2++)
+					{
+						printf(", %d", fibonacci(i2));
+					}
+					break;
+				}
+				else
+					i++;
 			}
 			break;
+		
 			
 		case '3' :
 			printf("Please enter the amount of discs you would like to move");
@@ -81,10 +93,13 @@ void runHanoi(int n, char x, char y, char z)
 	{
 		printf("\n Move disc 1 from pole %c to pole %c", x, y);
 	}
+	else
 	{
 		runHanoi(n-1, x, y, z); 
-    		printf("\n Move disk %d from pole %c to pole %c", n, x, y); 
-    		runHanoi(n-1, z, y, z); 
+    		printf("\n Move disk %d from pole %c to pole %c", n, x, y);
+		runHanoi(1, x, y, z);  
+    		runHanoi(n-1, x, y, z); 
 		
 	}
 }
+	
